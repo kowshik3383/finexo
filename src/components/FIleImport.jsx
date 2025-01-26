@@ -41,7 +41,7 @@ const ExcelUpload = () => {
     formData.append('file', uploadedFile);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/upload', formData, {
+      const response = await axios.post('https://finexo-backend.onrender.com/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -56,7 +56,7 @@ const ExcelUpload = () => {
 
   const fetchSheetData = async (sheetName) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/data/${sheetName}`);
+      const response = await axios.get(`https://finexo-backend.onrender.com/api/data/${sheetName}`);
       setTableData(response.data.data);
       setHeaders(response.data.data[0] || []);
     } catch (error) {
@@ -87,7 +87,7 @@ const ExcelUpload = () => {
     }
 
     try {
-      await axios.put('http://localhost:5000/api/data', {
+      await axios.put('https://finexo-backend.onrender.com/api/data', {
         sheetName: selectedSheet,
         rowIndex: editRowIndex,
         updatedRow: editRowData,
@@ -108,7 +108,7 @@ const ExcelUpload = () => {
 
   const confirmDeleteRow = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/data/${selectedSheet}/${deleteRowIndex}`);
+      await axios.delete(`https://finexo-backend.onrender.com/api/data/${selectedSheet}/${deleteRowIndex}`);
       const updatedData = tableData.filter((_, index) => index !== deleteRowIndex);
       setTableData(updatedData);
       setShowConfirmModal(false); // Close the confirmation modal
@@ -128,7 +128,7 @@ const ExcelUpload = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/data', {
+      await axios.post('https://finexo-backend.onrender.com/api/data', {
         sheetName: selectedSheet,
         newRow,
       });
